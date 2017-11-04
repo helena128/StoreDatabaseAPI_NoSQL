@@ -34,10 +34,10 @@ app.get('/api/people', function (req, res) {
 });
 
 
-// TODO: debug as it doesn't work
 app.get('/api/people/:_pid', function (req, res) {
-    console.log(">> Sending people..." + req.body.key);
-    People.getPeopleById(req.body._pid, function(err, people){
+    // complaining to be deprecated, but works fine
+    console.log(">> Sending people..." + req.param('_pid'));
+    People.getPeopleById(req.param('_pid'), function(err, people){
         if (err) {
             console.error(">> Error finding people");
             throw err;
