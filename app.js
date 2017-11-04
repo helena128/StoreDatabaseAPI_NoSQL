@@ -35,9 +35,9 @@ app.get('/api/people', function (req, res) {
 
 
 // TODO: debug as it doesn't work
-app.get('/api/people/:_id', function (req, res) {
-    console.log(">> Sending people...");
-    People.getPeopleById(req.param._id, function(err, people){
+app.get('/api/people/:_pid', function (req, res) {
+    console.log(">> Sending people..." + req.body.key);
+    People.getPeopleById(req.body._pid, function(err, people){
         if (err) {
             console.error(">> Error finding people");
             throw err;
@@ -48,18 +48,21 @@ app.get('/api/people/:_id', function (req, res) {
 
 
 app.post('/api/people', function (req, res) {
+    console.log(">> Sending people..." + req.body.passport); // debugging
     var people1 = req.body;
-    console.log(">> Posting people " + req.body);
+
     People.addPeople(people1, function(err, people1){
         if (err) {
             console.error(">> Error posting people");
-            res.status(500).send(err);
-            //throw err;
+            res.status(500).send({ error: 'Sending people failed!' });
+        } else {
+            res.json(people1);
         }
-        res.json(people1);
-    })
+    });
 });
 
 
 app.listen(3000);
 console.log('Running on port 3000...');
+
+module.exports = app;

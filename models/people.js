@@ -25,6 +25,7 @@
      phone: {
          type: String,
          required: [true, 'Phone required'],
+         unique: [true, 'Phone must be unique'],
          validate: {
              validator: function(v) {
                  return /^8-[0-9]{3}-[0-9]{3}-[0-9]{2}[-]{0,1}[0-9]{2}$/.test(v);
@@ -35,6 +36,7 @@
      email: {
          type: String,
          required: [true, 'Email required'],
+         unique: [true, 'Email must be unique'],
          validate: {
              validator: function(v) {
                  return /^[a-zA-Z0-9]{1,}@[a-z]{3,}\.[a-z]{3}$/.test(v);
@@ -45,9 +47,10 @@
      passport: {
          type: String,
          required: true,
+         unique: [true, 'Passport number must be unique'],
          validate: {
              validator: function(v) {
-                 return /^[a-zA-Z0-9]{1,}@[a-z]{3,}\.[a-z]{3}$/.test(v);
+                 return /^[0-9]{4}-[0-9]{6}$/.test(v);
              },
              message: '{VALUE} is not a valid passport number!'
          }
@@ -69,7 +72,11 @@
          type: String,
          minlength: 6
      }
- });
+ },
+
+     {
+         versionKey: false
+     });
 
  var People = module.exports = mongoose.model('People', peopleSchema, 'people');
 
