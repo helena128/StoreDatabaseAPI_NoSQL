@@ -74,6 +74,16 @@
  var People = module.exports = mongoose.model('People', peopleSchema, 'people');
 
  // get people
- module.exports.getPeople = function(callback, limit){
+ module.exports.getPeople = function(callback, limit) {
      People.find(callback).limit(limit);
+ };
+
+ // TODO: fix
+ module.exports.getPeopleById = function(id, callback) {
+     People.findById(id, callback);
+ };
+
+ // add people
+ module.exports.addPeople = function(people, callback) {
+     People.create(people, callback);
  };
