@@ -3,6 +3,9 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
+// setting directory for front
+app.use(express.static(__dirname + '/client'));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //app.use(bodyParser.json({type: 'application/json'}));
