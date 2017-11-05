@@ -22,6 +22,8 @@ app.get('/', function (req, res) {
     res.send('Please use /api/store');
 });
 
+// People operations
+// Read all people
 app.get('/api/people', function (req, res) {
     console.log(">> Sending people...");
     People.getPeople(function(err, people){
@@ -33,7 +35,7 @@ app.get('/api/people', function (req, res) {
     })
 });
 
-
+// Read people by Id
 app.get('/api/people/:_pid', function (req, res) {
     // complaining to be deprecated, but works fine
     console.log(">> Sending people..." + req.param('_pid'));
@@ -46,9 +48,9 @@ app.get('/api/people/:_pid', function (req, res) {
     })
 });
 
-
+// Create people
 app.post('/api/people', function (req, res) {
-    console.log(">> Sending people..." + req.body.passport); // debugging
+    //console.log(">> Sending people..." + req.body.passport); // debugging
     var people1 = req.body;
 
     People.addPeople(people1, function(err, people1){
@@ -59,6 +61,34 @@ app.post('/api/people', function (req, res) {
             res.json(people1);
         }
     });
+});
+
+// Update people
+// TODO: make this work
+app.put('/api/people/:_id', function(req, res) {
+    var id = req.params._id;
+    var people = req.body;
+    People.updatePeople(id, people, {}, function(err, people){
+        if (err) {
+            console.error(">> Error updating people" + err);
+            res.status(500).send({ error: 'Updating people failed!' });
+        } else {
+            res.json(people);
+        }
+    })
+});
+
+// Delete people
+app.delete('/api/people/:_id', function(req, res) {
+    var id = req.params._id;
+    People.removePeople(id, function(err, people) {
+        if (err) {
+            console.error(">> Error updating people" + err);
+            res.status(500).send({ error: 'Updating people failed!' });
+        } else {
+            res.json(people);
+        }
+    })
 });
 
 

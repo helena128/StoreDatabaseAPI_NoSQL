@@ -85,7 +85,7 @@
      People.find(callback).limit(limit);
  };
 
- // TODO: fix
+ // read by Id
  module.exports.getPeopleById = function(id, callback) {
      People.findById(id, callback);
  };
@@ -93,4 +93,27 @@
  // add people
  module.exports.addPeople = function(people, callback) {
      People.create(people, callback);
+ };
+
+ // update
+ module.exports.updatePeople = function(id, people, options, callback){
+     var query = {_id: id};
+     var update = {
+         first_name: options.first_name,
+         last_name: options.last_name,
+         phone: options.phone,
+         email: options.email,
+         passport: options.passport,
+         sex: options.sex,
+         date_of_registration: options.date_of_registration,
+         date_of_birth: options.date_of_birth,
+         password: options.password
+     };
+     People.findOneAndUpdate(query, update, options, callback);
+ };
+
+ // delete
+ module.exports.removePeople = function(id, callback){
+     var query = {_id: id};
+     People.remove(query, callback);
  };
