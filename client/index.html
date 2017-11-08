@@ -5,52 +5,96 @@
     <title>Store Database</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js"></script>
+    <meta charset="utf-8">
+    <title>StoreName</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <style>
+        body {
+            background-image: url(img/img1.png); /* Путь к фоновому изображению */
+            background-color: #c7b39b; /* Цвет фона */
+            /*height: 150%; */
+            /* Center and scale the image nicely */
+            /*background-position: center;*/
+            /*background-repeat: no-repeat; */
+            background-size: cover;
+        }
+
+    </style>
 </head>
 <body>
-    <!-- bootstrap style -->
-    <nav class="navbar navbar-default">
-        <div class="container">
-        <a class="navbar-brand" href="#">Store DB</a>
-        <!--button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button-->
+    <div class="container">
+        <header class="masthead">
+            <h1>StoreName</h1>
+            <nav class="navbar navbar-expand-md navbar-light bg-light rounded mb-3">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav text-md-center nav-justified w-100">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#!">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/store">Stores</a>
+                        </li>
+                        <li class="nav-item">
+                            <!-- TODO: test value - needs to be changed -->
+                            <a class="nav-link" href="#/people">Staff</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/client">Clients</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/purchase">Purchases</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
 
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav navbar-right nav">
-                <!--li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li-->
-                <li >
-                    <a href="#/people/add">Add People</a>
-                </li>
-                <!--li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li-->
-            </ul>
-            <!--form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form-->
-        </div>
-    </nav>
-
-    <main role="main" class="container">
-
-        <div class="row">
-            <div class="col-md-12">
-                <div ng-view></div>
+        <div class="container2" style="width: 700px">
+            <div style="width: 500px; height: 700px; margin: 0 auto;" align="center">
+                <img src="img/model1.jpg" class="slides" style="height: 700px" align="center">
+                <img src="img/model2.jpg" class="slides" style="height: 700px" align="center">
+                <img src="img/model3.jpg" class="slides" style="height: 700px" align="center">
+                <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)" >&#10094;</button>
+                <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)" onkeydown="detectButton()">&#10095;</button>
+            </div>
+            <div align="center" style="width: 500px; margin: 0 auto;">
+                <a href="#/product" style="margin-top: 10px; font-size:16px">Check our collection right now!</a>
             </div>
         </div>
+    </div>
+    <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
 
-    </main><!-- /.container -->
+        // left = 37
+        // right = 39
+
+
+
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+        }
+
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("slides");
+            if (n > x.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = x.length}
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            x[slideIndex-1].style.display = "block";
+        }
+    </script>
 
 
 

@@ -25,4 +25,6 @@ myApp.config(function($routeProvider) {
             redirectTo: '/'
         });
 
+    // store staff client purchase product
+
 });

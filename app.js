@@ -69,7 +69,7 @@ app.post('/api/people', function (req, res) {
 // Update people
 // TODO: make this work
 app.put('/api/people/:_id', function(req, res) {
-    var id = req.params._id;
+    var id = req.param('_id');
     var people = req.body;
     People.updatePeople(id, people, {}, function(err, people){
         if (err) {
