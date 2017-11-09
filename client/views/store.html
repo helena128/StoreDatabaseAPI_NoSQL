@@ -1,0 +1,24 @@
+<div class="panel panel-default" ng-init="getStore() ">
+    <div class="panel-heading">
+        <h3 class="panel-title">Stores</h3>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Store Address</th>
+            <th>City</th>
+            <th>ZipCode</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="s in store">
+            <td>{{s.store_street}}, {{s.store_building}}</td>
+            <td>{{s.store_city}}</td>
+            <td>{{s.store_zipcode}}</td>
+
+            <!--td><button class="btn btn-danger" ng-click="removePeople(p._id)">Remove</button></td-->
+
+        </tr>
+        </tbody>
+    </table>
+</div>

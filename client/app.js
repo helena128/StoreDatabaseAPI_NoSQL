@@ -11,6 +11,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
             templateUrl: 'views/home.html'
         })
 
+        // people pages
         .when('/people', {
             templateUrl: 'views/people.html',
             controller: 'PeopleController' // the 1st thing we see
@@ -20,10 +21,18 @@ myApp.config(['$routeProvider', function($routeProvider) {
             controller: 'PeopleController',
             templateUrl: 'views/add_people.html'
         })
+
         .when ('/people/edit/:id', {
             controller: 'PeopleController',
             templateUrl: 'views/edit_people.html'
         })
+
+        // store
+        .when('/store', {
+            controller: 'StoreController',
+            templateUrl: 'views/store.html'
+        })
+
         .otherwise({
             redirectTo: '/home'
         });
