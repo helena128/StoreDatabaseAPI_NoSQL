@@ -40,7 +40,7 @@ myApp.controller('PeopleController', [ '$scope', '$http', '$location', '$routePa
             $http.delete('/api/people/' + id).then(function(response) {
                 //refresh();
                 console.log('Book deleted');
-                window.location.href="#/people";
+                window.location.href="#!people";
             }).catch (function (){
                 console.log('Error while deleting');
             })

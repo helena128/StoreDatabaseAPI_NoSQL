@@ -19,16 +19,16 @@ myApp.controller('StoreController', [ '$scope', '$http', '$location', '$routePar
                 $scope.human = data;
                 console.log(data);
             });
-        };
+        };*/
 
-        $scope.removePeople = function (id) {
-            $http.delete('/api/people/' + id).then(function(response) {
+        $scope.removeStore = function (id) {
+            $http.delete('/api/store/' + id).then(function(response) {
                 //refresh();
-                console.log('Book deleted');
-                window.location.href="#/people";
+                console.log('Store deleted');
+                window.location.href="#!store";
             }).catch (function (){
                 console.log('Error while deleting');
             })
         }
-        */
+
     }]);

@@ -125,6 +125,21 @@ app.post('/api/store', function (req, res) {
     });
 });
 
+// Delete store
+app.delete('/api/store/:_id', function(req, res) {
+    var id = req.params._id;
+    // console.log('Trying to delete: ' + id);
+    Store.removeStore(id, function(err, store) {
+        if (err) {
+            console.error(">> Error updating store" + err);
+            res.status(500).send({ error: 'Delete store failed!' });
+        } else {
+            res.json(store);
+        }
+    })
+});
+
+
 app.listen(3000);
 console.log('Running on port 3000...');
 

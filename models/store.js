@@ -66,5 +66,5 @@ module.exports.addStore = function(people, callback) {
 // delete
 module.exports.removeStore = function(id, callback){
     var query = {_id: id};
-    People.remove(query, callback);
+    Store.remove(query, callback);
 };
