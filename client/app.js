@@ -1,18 +1,21 @@
 var myApp = angular.module('myApp', ['ngRoute']);
 
-myApp.config(function($routeProvider) {
-    $routeProvider.when('/', {
-        controller: 'PeopleController', // the 1st thing we see
-        templateUrl: 'views/people.html'
-    })
+myApp.config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+        .when('/', {
+        templateUrl: 'views/home.html'
+        })
+
+        .when ('/home', {
+            //controller: 'PeopleController',
+            templateUrl: 'views/home.html'
+        })
+
         .when('/people', {
-            controller: 'PeopleController', // the 1st thing we see
-            templateUrl: 'views/people.html'
+            templateUrl: 'views/people.html',
+            controller: 'PeopleController' // the 1st thing we see
         })
-        .when ('/people/details/:id', {
-            controller: 'PeopleController',
-            templateUrl: 'views/people_detail.html'
-        })
+
         .when ('/people/add', {
             controller: 'PeopleController',
             templateUrl: 'views/add_people.html'
@@ -22,9 +25,9 @@ myApp.config(function($routeProvider) {
             templateUrl: 'views/edit_people.html'
         })
         .otherwise({
-            redirectTo: '/'
+            redirectTo: '/home'
         });
 
     // store staff client purchase product
 
-});
+}]);
