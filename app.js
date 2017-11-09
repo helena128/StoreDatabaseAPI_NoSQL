@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 //app.use(bodyParser.json({type: 'application/json'}));
 
 People = require('./models/people');
+Store = require('./models/store');
 
 // Connect to mongoose
 mongoose.connect('mongodb://localhost:27017/storedb');
@@ -32,7 +33,7 @@ app.get('/api/people', function (req, res) {
     People.getPeople(function(err, people){
         if (err) {
             console.error(">> Error finding people");
-            throw err;
+            res.status(500).send({ error: 'Listing people failed!' });
         }
         res.json(people);
     })
@@ -45,7 +46,8 @@ app.get('/api/people/:_pid', function (req, res) {
     People.getPeopleById(req.param('_pid'), function(err, people){
         if (err) {
             console.error(">> Error finding people");
-            throw err;
+            //throw err;
+            res.status(500).send({ error: 'Listing people failed!' });
         }
         res.json(people);
     })
@@ -94,6 +96,34 @@ app.delete('/api/people/:_id', function(req, res) {
     })
 });
 
+
+
+// store
+// get all stores
+app.get('/api/store', function(req, res) {
+    console.log(">> Sending stores...");
+    Store.getStore(function(err, people){
+        if (err) {
+            console.error(">> Error finding stores");
+            res.status(500).send({ error: 'Listing stores failed!' });
+        }
+        res.json(people);
+    })
+});
+
+app.post('/api/store', function (req, res) {
+    //console.log(">> Sending people..." + req.body.passport); // debugging
+    var store1 = req.body;
+
+    Store.addStore(store1, function(err, store1){
+        if (err) {
+            console.error(">> Error posting stores");
+            res.status(500).send({ error: 'Posting stores failed!' });
+        } else {
+            res.json(store1);
+        }
+    });
+});
 
 app.listen(3000);
 console.log('Running on port 3000...');
