@@ -1,19 +1,26 @@
-<!--div class="panel panel-default" ng-init="getPeople() ">
+<div class="panel panel-default" ng-init="getPeople() ">
     <div class="panel-heading">
         <h3 class="panel-title">People</h3>
     </div>
-    <div class="panel-body">
-        <div class="row">
-            <div ng-repeat="p in people">
-                <div class="col-md-3">
-                    <div class="col-md-6">
-                        {{p.first_name}}
-                        {{p.last_name}}
-                        <a class="btn btn-primary" href="#/people/details/{{p._id}}">View Details</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div-->
-<H1>People</H1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th >Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <!--th><button class="btn btn-primary" ng-click="addContact()">Add Contact</button></th-->
+
+        </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="p in people">
+                <td>{{p.first_name}}</td>
+                <td>{{p.last_name}}</td>
+                <td>{{p.email}}</td>
+                <!--td><a class="btn btn-default btn-xs" href="#!people/details/{{p._id}}">View Details</a></td-->
+                <td><button class="btn btn-danger" ng-click="removePeople(p._id)">Remove</button></td>
+                <!--td><button class="btn btn-warning" ng-click="edit(contact._id)">Edit</button></td-->
+            </tr>
+        </tbody>
+    </table>
+</div>
