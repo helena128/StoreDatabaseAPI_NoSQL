@@ -114,7 +114,7 @@ app.get('/api/store', function(req, res) {
 app.post('/api/store', function (req, res) {
     //console.log(">> Sending people..." + req.body.passport); // debugging
     var store1 = req.body;
-
+    //console.log('>> Store' + store1.store_street +' ' + store1.store_building + ' ' + store1.store_zipcode);
     Store.addStore(store1, function(err, store1){
         if (err) {
             console.error(">> Error posting stores");

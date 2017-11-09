@@ -29,6 +29,14 @@ myApp.controller('StoreController', [ '$scope', '$http', '$location', '$routePar
             }).catch (function (){
                 console.log('Error while deleting');
             })
-        }
+        };
+
+        $scope.addStore = function() {
+            console.log($scope.store);
+            $http.post('/api/store', $scope.st).then(function(response) {
+                console.log(response);
+                window.location.href="#!store";
+            });
+        };
 
     }]);

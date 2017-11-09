@@ -2,7 +2,18 @@
     <div class="panel-heading">
         <h3 class="panel-title">Stores</h3>
     </div>
-    <table class="table table-striped">
+        <table class="table table-striped">
+            <tbody>
+            <tr>
+                <td><input class="form-control" ng-model="st.store_street"></td>
+                <td><input class="form-control" ng-model="st.store_building"></td>
+                <td><input class="form-control" ng-model="st.store_city"></td>
+                <td><input class="form-control" ng-model="st.store_zipcode"></td>
+                <td><button class="btn btn-primary" ng-click="addStore()">Add Store</button></td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table table-striped">
         <thead>
         <tr>
             <th>Store Address</th>
