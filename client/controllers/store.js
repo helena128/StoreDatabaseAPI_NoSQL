@@ -39,4 +39,15 @@ myApp.controller('StoreController', [ '$scope', '$http', '$location', '$routePar
             });
         };
 
+        $scope.updateStore = function(id) {
+            $http.put('/api/store/' + id, $scope.st).then(function (response) {
+                console.log(response);
+                window.location.href="#!store";
+            });
+        };
+
+        $scope.deselect = function() {
+            $scope.st = "";
+        }
+
     }]);

@@ -1,15 +1,20 @@
 <div class="panel panel-default" ng-init="getStore() ">
     <div class="panel-heading">
-        <h3 class="panel-title">Stores</h3>
+        <h2 class="panel-title">Stores</h2>
     </div>
         <table class="table table-striped">
             <tbody>
             <tr>
-                <td><input class="form-control" ng-model="st.store_street"></td>
-                <td><input class="form-control" ng-model="st.store_building"></td>
-                <td><input class="form-control" ng-model="st.store_city"></td>
-                <td><input class="form-control" ng-model="st.store_zipcode"></td>
-                <td><button class="btn btn-primary" ng-click="addStore()">Add Store</button></td>
+                <td><input class="form-control" ng-model="st.store_street" placeholder="Street"></td>
+                <td><input class="form-control" ng-model="st.store_building" placeholder="Building"></td>
+                <td><input class="form-control" ng-model="st.store_city" placeholder="City"></td>
+                <td><input class="form-control" ng-model="st.store_zipcode" placeholder="ZipCode"></td>
+                <td>
+                    <button class="btn btn-primary" ng-click="addStore()">Add Store</button>
+                </td>
+                <td>
+                    <button class="btn btn-info" ng-click="deselect()">Clear</button>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -27,7 +32,9 @@
             <td>{{s.store_city}}</td>
             <td>{{s.store_zipcode}}</td>
 
-            <td><button class="btn btn-danger" ng-click="removeStore(s._id)">Remove</button></td>
+            <td><button class="btn btn-danger" ng-click="removeStore(s._id)">Remove</button>&nbsp;&nbsp;
+                <button class="btn btn-warning" ng-click="updateStore(s._id)">Edit</button>&nbsp;&nbsp;
+            </td>
 
         </tr>
         </tbody>

@@ -58,13 +58,28 @@ module.exports.getStoreById = function(id, callback) {
     Store.findById(id, callback);
 };
 
-// add people
+// add store
 module.exports.addStore = function(people, callback) {
     Store.create(people, callback);
 };
 
-// delete
+// delete store
 module.exports.removeStore = function(id, callback){
     var query = {_id: id};
     Store.remove(query, callback);
+};
+
+// update store
+module.exports.updateStore = function(id, store, options, callback){
+    var query = {_id: id};
+    var update = {
+        //first_name: options.first_name
+        store_street: store.store_street,
+        store_building: store.store_building,
+        store_city: store.store_city,
+        store_zipcode: store.store_zipcode
+    };
+    /*console.log(update.store_zipcode + " >" + update.store_city + "< >" + update.store_building + "<  >" +
+        update.store_street); */
+    Store.findOneAndUpdate(query, update, options, callback);
 };

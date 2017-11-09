@@ -140,6 +140,24 @@ app.delete('/api/store/:_id', function(req, res) {
 });
 
 
+app.put('/api/store/:_id', function(req, res) {
+    //var id = req.param('_id');
+    var id = req.params._id;
+    var store = req.body;
+
+    //console.log(">> id" + id + " " + store.store_zipcode);
+
+    Store.updateStore(id, store, {}, function(err, store){
+        if (err) {
+            console.error(">> Error updating store" + err);
+            res.status(500).send({ error: 'Updating store failed!' });
+        } else {
+            res.json(store);
+        }
+    })
+});
+
+
 app.listen(3000);
 console.log('Running on port 3000...');
 
