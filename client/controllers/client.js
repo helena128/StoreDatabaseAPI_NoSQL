@@ -11,6 +11,15 @@ myApp.controller('ClientController', [ '$scope', '$http', '$location', '$routePa
                 console.log(data);
             });
         };
+
+        $scope.removeClient = function (id) {
+            $http.delete('/api/client/' + id).then(function(response) {
+                console.log('Client deleted');
+                window.location.href="#!client";
+            }).catch (function (){
+                console.log('Error while deleting');
+            })
+        };
     }
     ]
 );

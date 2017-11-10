@@ -251,6 +251,18 @@ app.get('/api/client', function (req, res) {
     })
 });
 
+app.delete('/api/client/:_id', function(req, res) {
+    var id = req.params._id;
+    Client.removeClient(id, function(err, client) {
+        if (err) {
+            console.error(">> Error deleting client" + err);
+            res.status(500).send({ error: 'Deleting client failed!' });
+        } else {
+            res.json(client);
+        }
+    })
+});
+
 app.listen(3000);
 console.log('Running on port 3000...');
 

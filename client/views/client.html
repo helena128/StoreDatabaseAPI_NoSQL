@@ -17,9 +17,9 @@
             <td>{{c.cli_id.phone}}</td>
             <td>{{c.cli_id.email}}</td>
             <td>{{c.cli_id.passport}}</td>
-            <td align="right"><a class="btn btn-info" href="#!people/details/{{p._id}}">View Details</a>&nbsp;&nbsp;
-                <button class="btn btn-danger" ng-click="removePeople(p._id)">Remove</button>&nbsp;&nbsp;
-                <a class="btn btn-warning" href="#!people/edit/{{p._id}}">Edit</a></td>
+            <td align="right"><a class="btn btn-info" href="#!people/details/{{c.cli_id._id}}">View Details</a>&nbsp;&nbsp;
+                <button class="btn btn-danger" ng-click="removeClient(c._id)">Remove</button>&nbsp;&nbsp;
+                <a class="btn btn-warning" href="#!people/edit/{{c.cli_id._id}}">Edit</a></td>
         </tr>
         </tbody>
     </table>
