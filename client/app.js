@@ -76,7 +76,8 @@ myApp.config(['$routeProvider', function($routeProvider) {
 
         // staff
         .when('/staff', {
-            templateUrl: 'views/staff.html'
+            templateUrl: 'views/staff.html',
+            controller: 'StaffController'
         })
 
         .otherwise({

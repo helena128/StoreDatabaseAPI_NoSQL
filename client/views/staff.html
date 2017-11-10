@@ -1,1 +1,31 @@
-<H1>staff</H1>
+<div class="panel panel-default" ng-init="getStaff()">
+    <div class="panel-heading">
+        <h2 class="panel-title">Staff</h2>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone number</th>
+            <th>Email</th>
+            <th>ID</th>
+            <th>Store Address</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="s in staff">
+            <td>{{s.staff_id.first_name}} {{s.staff_id.last_name}}</td>
+            <td>{{s.staff_id.phone}}</td>
+            <td>{{s.staff_id.email}}</td>
+            <td>{{s.staff_id.passport}}</td>
+            <td>{{s.store_id.store_building}} {{s.store_id.store_street}}, {{s.store_id.store_city}}</td>
+            <td align="right">
+                <button class="btn btn-danger" ng-click="removeStaff(s._id)">Remove</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6" align="right"><a class="btn btn-primary" href="#!staff/add">Add Staff</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

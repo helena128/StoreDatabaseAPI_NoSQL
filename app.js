@@ -15,6 +15,7 @@ People = require('./models/people');
 Store = require('./models/store');
 Client = require('./models/clients');
 Product = require('./models/product');
+Staff = require('./models/staff');
 
 // Connect to mongoose
 mongoose.connect('mongodb://localhost:27017/storedb');
@@ -241,9 +242,10 @@ app.put('/api/product/:_id', function(req, res) {
 app.post('/api/client', function (req, res) {
     // complaining to be deprecated, but works fine
     var cl_id = req.body;
+    console.log(" >> CLI " + cl_id.cli_id);
     Client.addClient(cl_id, function (err, cl_id) {
         if (err) {
-            console.error(">> Error creating client");
+            console.error(">> Error creating client" + err);
             //throw err;
             res.status(500).send({ error: 'Posting client failed!' });
         } else {
@@ -277,6 +279,60 @@ app.delete('/api/client/:_id', function(req, res) {
         }
     })
 });
+
+// add client by id in PARAMS
+app.post('/api/client/:_id', function(req, res) {
+    var client = new Client({ cli_id : req.params._id});
+    Client.addClient(client, function (err, client) {
+        if (err) {
+            console.error(">> Error creating client by Id" + err);
+            res.status(500).send({ error: 'Creating client by id failed!' });
+        } else {
+            res.json(client);
+        }
+    });
+});
+
+
+// staff
+// add staff
+app.post('/api/staff', function(req, res) {
+    var staff = req.body;
+    Staff.addStaff(staff, function(err, staff) {
+        if (err) {
+            console.error(">> Error creating staff" + err);
+            res.status(500).send({ error: 'Creating staff failed!' });
+        } else {
+            res.json(staff);
+        }
+    })
+});
+
+// get staff
+app.get('/api/staff', function (req, res) {
+    Staff.getStaff(function(err, staff) {
+        if (err) {
+            console.error(">> Error getting clients " + err);
+            res.status(500).send({ error: 'Getting clients failed!' });
+        } else {
+            res.json(staff);
+        }
+    })
+});
+
+// delete staff
+app.delete('/api/staff/:_id', function(req, res) {
+    var id = req.params._id;
+    Staff.removeStaff(id, function(err, staff) {
+        if (err) {
+            console.error(">> Error deleting staff" + err);
+            res.status(500).send({ error: 'Deleting staff failed!' });
+        } else {
+            res.json(staff);
+        }
+    })
+});
+
 
 app.listen(3000);
 console.log('Running on port 3000...');
