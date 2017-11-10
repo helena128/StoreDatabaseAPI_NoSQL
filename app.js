@@ -16,6 +16,7 @@ Store = require('./models/store');
 Client = require('./models/clients');
 Product = require('./models/product');
 Staff = require('./models/staff');
+Purchase = require('./models/purchase');
 
 // Connect to mongoose
 mongoose.connect('mongodb://localhost:27017/storedb');
@@ -333,6 +334,32 @@ app.delete('/api/staff/:_id', function(req, res) {
     })
 });
 
+
+// purchase
+// add purchase
+app.post('/api/purchase', function(req, res) {
+    var purchase = req.body;
+    Purchase.addPurchase(purchase, function(err, purchase) {
+        if (err) {
+            console.error(">> Error creating purchase" + err);
+            res.status(500).send({ error: 'Creating purchase failed!' });
+        } else {
+            res.json(purchase);
+        }
+    })
+});
+
+// get purchase
+app.get('/api/purchase', function (req, res) {
+    Purchase.getPurchase(function(err, purchase) {
+        if (err) {
+            console.error(">> Error getting purchase " + err);
+            res.status(500).send({ error: 'Getting purchase failed!' });
+        } else {
+            res.json(purchase);
+        }
+    })
+});
 
 app.listen(3000);
 console.log('Running on port 3000...');
