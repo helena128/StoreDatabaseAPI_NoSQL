@@ -34,8 +34,23 @@ app.get('/api/people', function (req, res) {
         if (err) {
             console.error(">> Error finding people");
             res.status(500).send({ error: 'Listing people failed!' });
+        } else {
+            res.json(people);
         }
-        res.json(people);
+    })
+});
+
+
+// get people by email
+app.get('/api/peoplemail/:mail', function (req, res) {
+    var mail = req.params.mail;
+    People.getPeopleByMail(mail, function(err, people){
+        if (err) {
+            console.error(">> Error finding people");
+            res.status(500).send({ error: 'Listing people failed!' });
+        } else {
+            res.json(people);
+        }
     })
 });
 

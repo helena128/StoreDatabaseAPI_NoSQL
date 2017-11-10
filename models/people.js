@@ -118,3 +118,8 @@
      var query = {_id: id};
      People.remove(query, callback);
  };
+
+ // get people by Main
+ module.exports.getPeopleByMail = function(mail, callback) {
+     var query = People.findOne({'email': mail}).exec(callback);
+ };

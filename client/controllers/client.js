@@ -20,6 +20,17 @@ myApp.controller('ClientController', [ '$scope', '$http', '$location', '$routePa
                 console.log('Error while deleting');
             })
         };
+
+        $scope.addClient = function () {
+
+            // to create client we first need to create people object
+            $http.post('/api/people', $scope.human).then(function(response) {
+                console.log('People posted');
+                //window.location.href="#!people";
+            }).catch (function (){
+                console.log('Error while posting');
+            });
+        }
     }
     ]
 );
