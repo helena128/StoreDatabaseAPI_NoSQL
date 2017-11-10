@@ -12,14 +12,6 @@ myApp.controller('PeopleController', [ '$scope', '$http', '$location', '$routePa
             $scope.people = data;
             console.log(response.data);
         })*/
-        var refresh = function() {
-            $http.get('/api/people').then(function(response){
-                var data = response.data;
-                $scope.people = data;
-                console.log(data);
-            });
-        };
-
         $scope.getPeople = function () {
             $http.get('/api/people').then(function(response){
                 var data = response.data;
@@ -29,11 +21,18 @@ myApp.controller('PeopleController', [ '$scope', '$http', '$location', '$routePa
         };
 
         $scope.getHuman = function (id) {
-            $http.get('/api/people/:id').then(function(response){
+            console.log(">> People id" + id);
+            var id = $routeParams.id;
+            $http.get('/api/people/' + id).then(function(response){
                 var data = response.data;
                 $scope.human = data;
                 console.log(data);
+                //window.location.href = ("#!people/details/" + id);
             });
+        };
+
+        $scope.toPeopleList = function () {
+            window.location.href = "#!people";
         };
 
         $scope.removePeople = function (id) {

@@ -60,8 +60,7 @@
          enum: ['m', 'f']
      },
      date_of_registration: {
-         type: Date,
-         default: Date.now()
+         type: Date
      },
 
      date_of_birth: {
@@ -70,7 +69,8 @@
 
      password: {
          type: String,
-         minlength: 6
+         minlength: 6,
+         required: [true, 'Password required']
      }
  },
 

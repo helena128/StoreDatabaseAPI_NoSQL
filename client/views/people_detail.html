@@ -1,19 +1,38 @@
 <div class="panel panel-default" ng-init="getHuman() ">
-    <div class="panel-heading">
-        <h3 class="panel-title">{{human._id}}</h3>
-    </div>
-    <div class="panel-body">
-        <div class="row">
-            <div ng-repeat="p in people">
-                <div class="col-md-3">
-                        {{p.first_name}}
-                        {{p.last_name}}
-                        {{p.passport}}
-                        {{p.phone}}
-                        {{p.email}}
-                        <a class="btn btn-primary" href="#/people/details/{{p._id}}">View Details</a>
-                </div>
-            </div>
-        </div>
+        <table class="table table-striped">
+        <tbody>
+        <tr>
+            <td>Name</td>
+            <td>{{human.first_name}} {{human.last_name}}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{{human.email}}</td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td>{{human.phone}}</td>
+        </tr>
+        <tr>
+            <td>ID</td>
+            <td>{{human.passport}}</td>
+        </tr>
+        <tr ng-hide="{{human.sex}} == null">
+            <td>Sex</td>
+            <td>{{human.sex}}</td>
+        </tr>
+        <tr ng-hide="{{human.date_of_birth}} == null">
+            <td>Date of birth</td>
+            <td>{{human.date_of_registration}}</td>
+        </tr>
+        <tr ng-hide="{{human.date_of_registration}} == null">
+            <td>Date of registration</td>
+            <td>{{human.date_of_registration}}</td>
+        </tr>
+        <!-- TODO: not showing passport here -->
+        </tbody>
+    </table>
+    <div>
+        <button class="btn btn-primary" ng-click="toPeopleList()">Back</button>
     </div>
 </div>

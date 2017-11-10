@@ -43,10 +43,11 @@ app.get('/api/people', function (req, res) {
 });
 
 // Read people by Id
-app.get('/api/people/:_pid', function (req, res) {
+app.get('/api/people/:_id', function (req, res) {
     // complaining to be deprecated, but works fine
-    console.log(">> Sending people..." + req.param('_pid'));
-    People.getPeopleById(req.param('_pid'), function(err, people){
+    //console.log(">> Sending people..." + req.param('_id'));
+    var id = req.params._id;
+    People.getPeopleById(id, function(err, people){
         if (err) {
             console.error(">> Error finding people");
             //throw err;
@@ -224,6 +225,23 @@ app.delete('/api/product/:_id', function(req, res) {
         if (err) {
             console.error(">> Error updating store" + err);
             res.status(500).send({ error: 'Delete store failed!' });
+        } else {
+            res.json(product);
+        }
+    })
+});
+
+app.put('/api/product/:_id', function(req, res) {
+    //var id = req.param('_id');
+    var id = req.params._id;
+    var product = req.body;
+
+    //console.log(">> id" + id + " " + store.store_zipcode);
+
+    Product.updateProduct(id, product, {}, function(err, product){
+        if (err) {
+            console.error(">> Error updating store" + err);
+            res.status(500).send({ error: 'Updating store failed!' });
         } else {
             res.json(product);
         }

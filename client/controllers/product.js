@@ -14,10 +14,27 @@ myApp.controller('ProductController', [ '$scope', '$http', '$location', '$routeP
 
         $scope.addProduct = function() {
             console.log($scope.pr);
-            /*$http.post('/api/product', $scope.pr).then(function(response) {
+            $http.post('/api/product', $scope.pr).then(function(response) {
                 console.log(response);
-                window.location.href="#!product";
-            });*/
+                window.location.href="#!collection";
+            });
+        };
+
+        $scope.removeProduct = function (id) {
+            $http.delete('/api/product/' + id).then(function(response) {
+                //refresh();
+                console.log('Product deleted');
+                window.location.href="#!collection";
+            }).catch (function (){
+                console.log('Error while deleting');
+            })
+        };
+
+        $scope.updateProduct = function(id) {
+            $http.put('/api/product/' + id, $scope.pr).then(function (response) {
+                console.log(response);
+                window.location.href="#!collection";
+            });
         };
 
 

@@ -27,6 +27,11 @@ myApp.config(['$routeProvider', function($routeProvider) {
             templateUrl: 'views/edit_people.html'
         })
 
+        .when ('/people/details/:id', {
+            controller: 'PeopleController',
+            templateUrl: 'views/people_detail.html'
+        })
+
         // store
         .when('/store', {
             controller: 'StoreController',
