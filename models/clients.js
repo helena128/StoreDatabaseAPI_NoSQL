@@ -12,9 +12,12 @@ var clientSchema = mongoose.Schema({
 
 var Client = module.exports = mongoose.model('Client', clientSchema, 'client');
 
-module.exports.getClients = function(/*callback*/){
-    //Client.find(callback).populate('cli_id');
-    Client.find({}).populate('cli_id').exec(function(error, posts) {
+module.exports.getClients = function(callback){
+    Client.find({}).populate('cli_id').exec(callback/*function(error, posts) {
         console.log(JSON.stringify(posts, null, "\t"))
-    })
+    }*/)
+};
+
+module.exports.addClient = function(client, callback){
+    Client.create(client, callback)
 };

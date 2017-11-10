@@ -59,7 +59,14 @@ myApp.config(['$routeProvider', function($routeProvider) {
 
         // client
         .when('/client', {
-            templateUrl: 'views/client.html'
+            templateUrl: 'views/client.html',
+            controller: 'ClientController'
+        })
+
+        // add client
+        .when('/client/add', {
+            templateUrl: 'views/add_client.html',
+            controller: 'ClientController'
         })
 
         // purchase

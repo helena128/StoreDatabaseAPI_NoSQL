@@ -25,9 +25,6 @@ db.once('open', function() {
     console.log("Connected");
 });
 
-app.get('/', function (req, res) {
-    res.send('Please use /api/store');
-});
 
 // People operations
 // Read all people
@@ -161,31 +158,6 @@ app.put('/api/store/:_id', function(req, res) {
 });
 
 
-// client
-app.post('/api/client', function (req, res) {
-    console.log(">> Sending client...");
-    var people1 = req.body;
-    People.addPeople(people1, function(err, people1){
-        if (err) {
-            console.error(">> Error posting people" + err);
-            res.status(500).send({ error: 'Sending people failed!' });
-        } else {
-            //res.json(people1);
-            var cl = new Client({cli_id: people1._id});
-            cl.save(function (err) {
-                if (err) {
-                    console.error(">> Error posting people" + err);
-                    res.status(500).send({ error: 'Sending people failed!' });
-                } else {
-                    Client.getClients();
-                }
-            });
-        }
-    });
-
-    //Client.getClients();
-});
-
 
 // products
 // add product
@@ -243,6 +215,38 @@ app.put('/api/product/:_id', function(req, res) {
             res.status(500).send({ error: 'Updating store failed!' });
         } else {
             res.json(product);
+        }
+    })
+});
+
+
+
+// client
+// add client by people's id
+app.post('/api/client', function (req, res) {
+    // complaining to be deprecated, but works fine
+    var cl_id = req.body;
+    Client.addClient(cl_id, function (err, cl_id) {
+        if (err) {
+            console.error(">> Error creating client");
+            //throw err;
+            res.status(500).send({ error: 'Posting client failed!' });
+        } else {
+            console.log(">> Client created successfully...");
+            res.json(cl_id);
+        }
+    });
+});
+
+// getting all clients
+// complains about deprecated mpromise library
+app.get('/api/client', function (req, res) {
+    Client.getClients(function(err, client) {
+        if (err) {
+            console.error(">> Error getting clients " + err);
+            res.status(500).send({ error: 'Getting clients failed!' });
+        } else {
+            res.json(client);
         }
     })
 });
