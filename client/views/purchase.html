@@ -1,1 +1,33 @@
-<H1>Purchase</H1>
+<div class="panel panel-default" ng-init="getPurchase()">
+    <div class="panel-heading">
+        <h2 class="panel-title">Purchase</h2>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Product</th>
+            <th>Sold by</th>
+            <th>Client</th>
+            <!--th>Date</th-->
+            <th>Price</th>
+            <th>Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="p in purchase">
+            <td>{{p.prod_id.product_name}}</td>
+            <td>{{p.staff_id.last_name}}</td>
+            <td>{{p.client_id.last_name}}</td>
+            <!--td>{{p.date_sold}}</td-->
+            <td>{{p.prod_id.product_price}}</td>
+            <td>{{p.amount}}</td>
+            <!--td align="right"><a class="btn btn-info" href="#!people/details/{{c.cli_id._id}}">View Details</a>&nbsp;&nbsp;
+                <button class="btn btn-danger" ng-click="removeClient(c._id)">Remove</button>&nbsp;&nbsp;
+                <a class="btn btn-warning" href="#!people/edit/{{c.cli_id._id}}">Edit</a></td-->
+        </tr>
+        <!--tr>
+            <td colspan="5" align="right"><a class="btn btn-primary" href="#!client/add">Add Client</a></td>
+        </tr-->
+        </tbody>
+    </table>
+</div>

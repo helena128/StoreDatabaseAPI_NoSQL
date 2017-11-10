@@ -71,7 +71,8 @@ myApp.config(['$routeProvider', function($routeProvider) {
 
         // purchase
         .when('/purchase', {
-            templateUrl: 'views/purchase.html'
+            templateUrl: 'views/purchase.html',
+            controller: 'PurchaseController'
         })
 
         // staff
