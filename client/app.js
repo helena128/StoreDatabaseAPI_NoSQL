@@ -33,6 +33,27 @@ myApp.config(['$routeProvider', function($routeProvider) {
             templateUrl: 'views/store.html'
         })
 
+        // collection - aka products
+        .when('/collection', {
+            templateUrl: 'views/product.html',
+            controller: 'ProductController'
+        })
+
+        // client
+        .when('/client', {
+            templateUrl: 'views/client.html'
+        })
+
+        // purchase
+        .when('/purchase', {
+            templateUrl: 'views/purchase.html'
+        })
+
+        // staff
+        .when('/staff', {
+            templateUrl: 'views/staff.html'
+        })
+
         .otherwise({
             redirectTo: '/home'
         });

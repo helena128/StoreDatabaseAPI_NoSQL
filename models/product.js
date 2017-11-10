@@ -1,0 +1,50 @@
+var mongoose = require('mongoose');
+
+// Product
+var productSchema = mongoose.Schema({
+        product_name: {
+            type: String,
+            required: [true, 'Product name cannot be null'],
+            validate: {
+                validator: function (v) {
+                    return /^[A-Za-z0-9\- ]+$/.test(v);
+                },
+                message: '{VALUE} is not a valid product name!'
+            }
+        },
+        product_price: {
+            type: String,
+            required: [true, 'Product price cannot be null'],
+            validate: {
+                validator: function (v) {
+                    return /^[0-9]+$/.test(v);
+                },
+                message: '{VALUE} is not a valid product price!'
+            }
+        },
+        product_pic: {
+            type: String,
+            required:   [true, 'Product pic cannot be null'],
+            unique: [true, 'This image is already used']
+        }
+
+    },
+    {versionKey: false});
+
+var Product = module.exports = mongoose.model('Product', productSchema, 'product');
+
+// get all products
+module.exports.getProducts = function(callback, limit) {
+    Product.find(callback).limit(limit);
+};
+
+// add product
+module.exports.addProduct = function(product, callback) {
+    Product.create(product, callback);
+};
+
+// delete store
+module.exports.removeProduct = function(id, callback){
+    var query = {_id: id};
+    Product.remove(query, callback);
+};

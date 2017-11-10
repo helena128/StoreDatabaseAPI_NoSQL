@@ -1,0 +1,51 @@
+<div class="panel panel-default" ng-init="getProducts() ">
+    <div class="panel-heading">
+        <h2 class="panel-title">Collection</h2>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div ng-repeat="p in product">
+                <div class="col-md-6">
+                    <table>
+                        <tr align="center">
+                            <td>
+                            <img class="thumbnail" style="max-height: 500px; max-width: 340px" src="{{p.product_pic}}">
+                            </td>
+                        </tr>
+                        <tr align="center">
+                            <td>
+                                <div style="margin: 0 auto; font-weight: bold " align="center">{{p.product_name}}
+                            </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            <div align="center" style="margin-bottom: 10px">{{p.product_price}}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><button class="btn btn-danger" ng-click="removeProduct(p._id)">Remove</button>&nbsp;&nbsp;
+                                <button class="btn btn-warning" ng-click="updateProduct(p._id)">Edit</button>&nbsp;&nbsp;</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <tbody>
+        <tr>
+            <td><input class="form-control" ng-model="pr.product_name" placeholder="Name"></td>
+            <td><input class="form-control" ng-model="pr.product_price" placeholder="Price"></td>
+            <td><input class="form-control" ng-model="pr.product_pic" placeholder="Picture url"></td>
+            <td>
+                <button class="btn btn-primary" ng-click="addProduct()">Add Product</button>
+            </td>
+            <td>
+                <button class="btn btn-info" ng-click="deselect()">Clear</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

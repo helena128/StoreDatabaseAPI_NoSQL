@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 
 // Client schema
 var clientSchema = mongoose.Schema({
-    _id: {
-        type: Schema.Types.ObjectId,
+    cli_id: {
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'People',
         required: true,
         unique: true
@@ -12,6 +12,9 @@ var clientSchema = mongoose.Schema({
 
 var Client = module.exports = mongoose.model('Client', clientSchema, 'client');
 
-module.exports.getClients = function(callback){
-    Client.find(callback).limit(limit);
+module.exports.getClients = function(/*callback*/){
+    //Client.find(callback).populate('cli_id');
+    Client.find({}).populate('cli_id').exec(function(error, posts) {
+        console.log(JSON.stringify(posts, null, "\t"))
+    })
 };

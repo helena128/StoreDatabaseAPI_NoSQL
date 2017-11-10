@@ -10,8 +10,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //app.use(bodyParser.json({type: 'application/json'}));
 
+// models
 People = require('./models/people');
 Store = require('./models/store');
+Client = require('./models/clients');
+Product = require('./models/product');
 
 // Connect to mongoose
 mongoose.connect('mongodb://localhost:27017/storedb');
@@ -60,7 +63,7 @@ app.post('/api/people', function (req, res) {
 
     People.addPeople(people1, function(err, people1){
         if (err) {
-            console.error(">> Error posting people");
+            console.error(">> Error posting people" + err);
             res.status(500).send({ error: 'Sending people failed!' });
         } else {
             res.json(people1);
@@ -157,6 +160,75 @@ app.put('/api/store/:_id', function(req, res) {
     })
 });
 
+
+// client
+app.post('/api/client', function (req, res) {
+    console.log(">> Sending client...");
+    var people1 = req.body;
+    People.addPeople(people1, function(err, people1){
+        if (err) {
+            console.error(">> Error posting people" + err);
+            res.status(500).send({ error: 'Sending people failed!' });
+        } else {
+            //res.json(people1);
+            var cl = new Client({cli_id: people1._id});
+            cl.save(function (err) {
+                if (err) {
+                    console.error(">> Error posting people" + err);
+                    res.status(500).send({ error: 'Sending people failed!' });
+                } else {
+                    Client.getClients();
+                }
+            });
+        }
+    });
+
+    //Client.getClients();
+});
+
+
+// products
+// add product
+app.post('/api/product', function (req, res) {
+    console.log(">> Posting product..." + req.body.product_name); // debugging
+    var product1 = req.body;
+    console.log('>> Product' + product1.product_name +' ' + product1.product_price + ' ' + product1.product_price);
+    Product.addProduct(product1, function(err, product1){
+        if (err) {
+            console.error(">> Error posting products");
+            res.status(500).send({ error: 'Posting products failed!' });
+        } else {
+            res.json(product1);
+        }
+    });
+});
+
+// get products
+app.get('/api/product', function (req, res) {
+    console.log(">> Sending products...");
+    Product.getProducts(function(err, product){
+        if (err) {
+            console.error(">> Error finding products");
+            res.status(500).send({ error: 'Listing products failed!' });
+        } else {
+            //console.log(product.product_name + " " + product.product_price);
+            res.json(product);
+        }
+    })
+});
+
+app.delete('/api/product/:_id', function(req, res) {
+    var id = req.params._id;
+    // console.log('Trying to delete: ' + id);
+    Product.removeProduct(id, function(err, product) {
+        if (err) {
+            console.error(">> Error updating store" + err);
+            res.status(500).send({ error: 'Delete store failed!' });
+        } else {
+            res.json(product);
+        }
+    })
+});
 
 app.listen(3000);
 console.log('Running on port 3000...');
