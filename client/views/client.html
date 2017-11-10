@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div class="panel panel-default" ng-init="getClients()">
     <div class="panel-heading">
         <h2 class="panel-title">Client</h2>
     </div>
@@ -12,10 +12,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td colspan="5" align="right">
-                <a class="btn btn-primary" href="#!client/add">Add Client</a>
-            </td>
+        <tr ng-repeat="c in client">
+            <td>{{c.cli_id.first_name}} {{c.cli_id.last}}</td>
+            <td>{{c.cli_id.phone}}</td>
+            <td>{{c.cli_id.email}}</td>
+            <td>{{c.cli_id.passport}}</td>
+            <td align="right"><a class="btn btn-info" href="#!people/details/{{p._id}}">View Details</a>&nbsp;&nbsp;
+                <button class="btn btn-danger" ng-click="removePeople(p._id)">Remove</button>&nbsp;&nbsp;
+                <a class="btn btn-warning" href="#!people/edit/{{p._id}}">Edit</a></td>
         </tr>
         </tbody>
     </table>

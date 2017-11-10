@@ -21,3 +21,8 @@ module.exports.getClients = function(callback){
 module.exports.addClient = function(client, callback){
     Client.create(client, callback)
 };
+
+module.exports.removeClient = function(id, callback){
+    var query = {_id: id};
+    Client.remove(query, callback);
+};
