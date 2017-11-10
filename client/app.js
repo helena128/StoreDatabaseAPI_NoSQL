@@ -33,10 +33,16 @@ myApp.config(['$routeProvider', function($routeProvider) {
             templateUrl: 'views/people_detail.html'
         })
 
-
+        // update people
         .when ('/people/edit/:id', {
             controller: 'PeopleController',
             templateUrl: 'views/edit_people.html'
+        })
+
+        // add people
+        .when('/people/add', {
+            controller: 'PeopleController',
+            templateUrl: 'views/add_people.html'
         })
 
         // store

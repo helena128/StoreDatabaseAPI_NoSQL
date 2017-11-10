@@ -17,12 +17,12 @@
                 <td>{{p.first_name}}</td>
                 <td>{{p.last_name}}</td>
                 <td>{{p.email}}</td>
-                <td align="right"><a class="btn btn-primary" href="#!people/details/{{p._id}}">View Details</a>&nbsp;&nbsp;
+                <td align="right"><a class="btn btn-info" href="#!people/details/{{p._id}}">View Details</a>&nbsp;&nbsp;
                 <button class="btn btn-danger" ng-click="removePeople(p._id)">Remove</button>&nbsp;&nbsp;
                 <a class="btn btn-warning" href="#!people/edit/{{p._id}}">Edit</a></td>
             </tr>
             <tr>
-                <td><a class="btn btn-primary" href="#!people/add/">Add People</a></td></td>
+                <td colspan="4" align="right"><a class="btn btn-primary" href="#!people/add">Add People</a></td>
             </tr>
         </tbody>
     </table>

@@ -3,15 +3,6 @@ var myApp = angular.module('myApp');
 myApp.controller('PeopleController', [ '$scope', '$http', '$location', '$routeParams', '$routeParams',
     function($scope, $http, $location, $routeParams){
         console.log('>> PeopleController loaded');
-        /*$http.get('/api/people').then(function(response){
-            var data = response.data;
-            $scope.people = data;
-            console.log(data);
-        }
-        $http.get('/api/people/:_id').then(function (response) {
-            $scope.people = data;
-            console.log(response.data);
-        })*/
         $scope.getPeople = function () {
             $http.get('/api/people').then(function(response){
                 var data = response.data;
@@ -51,6 +42,16 @@ myApp.controller('PeopleController', [ '$scope', '$http', '$location', '$routePa
                 window.location.href="#!people";
             }).catch (function (){
                 console.log('Error while deleting');
+            })
+        };
+
+        $scope.addPeople = function () {
+            $http.post('/api/people', $scope.human).then(function(response) {
+                //refresh();
+                console.log('People posted');
+                window.location.href="#!people";
+            }).catch (function (){
+                console.log('Error while posting');
             })
         }
 }]);

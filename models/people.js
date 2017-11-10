@@ -60,7 +60,8 @@
          enum: ['m', 'f']
      },
      date_of_registration: {
-         type: Date
+         type: Date,
+         default: Date.now()
      },
 
      date_of_birth: {
