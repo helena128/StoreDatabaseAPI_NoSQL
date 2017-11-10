@@ -99,15 +99,15 @@
  module.exports.updatePeople = function(id, people, options, callback){
      var query = {_id: id};
      var update = {
-         first_name: options.first_name,
-         last_name: options.last_name,
-         phone: options.phone,
-         email: options.email,
-         passport: options.passport,
-         sex: options.sex,
-         date_of_registration: options.date_of_registration,
-         date_of_birth: options.date_of_birth,
-         password: options.password
+         first_name: people.first_name,
+         last_name: people.last_name,
+         phone: people.phone,
+         email: people.email,
+         passport: people.passport,
+         sex: people.sex,
+         date_of_registration: people.date_of_registration,
+         date_of_birth: people.date_of_birth,
+         password: people.password
      };
      People.findOneAndUpdate(query, update, options, callback);
  };

@@ -20,8 +20,8 @@ myApp.controller('PeopleController', [ '$scope', '$http', '$location', '$routePa
             });
         };
 
-        $scope.getHuman = function (id) {
-            console.log(">> People id" + id);
+        $scope.getHuman = function (/*id*/) {
+            //console.log(">> People id" + id);
             var id = $routeParams.id;
             $http.get('/api/people/' + id).then(function(response){
                 var data = response.data;
@@ -33,6 +33,15 @@ myApp.controller('PeopleController', [ '$scope', '$http', '$location', '$routePa
 
         $scope.toPeopleList = function () {
             window.location.href = "#!people";
+        };
+
+        $scope.editHuman = function() {
+            var id = $routeParams.id;
+            $http.put('/api/people/' + id, $scope.human).then(function(response) {
+                var data = response.data;
+                console.log(data);
+                window.location.href = "#!people";
+            });
         };
 
         $scope.removePeople = function (id) {
