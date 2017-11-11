@@ -30,6 +30,7 @@ db.once('open', function() {
 
 // People operations
 // Read all people
+/*
 app.get('/api/people', function (req, res) {
     console.log(">> Sending people...");
     People.getPeople(function(err, people){
@@ -112,7 +113,7 @@ app.delete('/api/people/:_id', function(req, res) {
         }
     })
 });
-
+*/
 
 
 // store
@@ -241,23 +242,36 @@ app.put('/api/product/:_id', function(req, res) {
 // client
 // add client by people's id
 app.post('/api/client', function (req, res) {
-    // complaining to be deprecated, but works fine
-    var cl_id = req.body;
-    console.log(" >> CLI " + cl_id.cli_id);
-    Client.addClient(cl_id, function (err, cl_id) {
+    console.log(">> Posting client..." + req.body.passport); // debugging
+    var client1 = req.body;
+
+    Client.addClient(client1, function(err, client1){
         if (err) {
-            console.error(">> Error creating client" + err);
-            //throw err;
-            res.status(500).send({ error: 'Posting client failed!' });
+            console.error(">> Error posting people" + err);
+            res.status(500).send({ error: 'Sending people failed!' });
         } else {
-            console.log(">> Client created successfully...");
-            res.json(cl_id);
+            res.json(client1);
         }
     });
 });
 
+
+app.get('/api/client', function (req, res) {
+    console.log(">> Sending products...");
+    Client.getClients(function(err, client){
+        if (err) {
+            console.error(">> Error finding products");
+            res.status(500).send({ error: 'Listing products failed!' });
+        } else {
+            //console.log(product.product_name + " " + product.product_price);
+            res.json(client);
+        }
+    })
+});
+
 // getting all clients
 // complains about deprecated mpromise library
+/*
 app.get('/api/client', function (req, res) {
     Client.getClients(function(err, client) {
         if (err) {
@@ -268,6 +282,7 @@ app.get('/api/client', function (req, res) {
         }
     })
 });
+*/
 
 app.delete('/api/client/:_id', function(req, res) {
     var id = req.params._id;
@@ -282,6 +297,7 @@ app.delete('/api/client/:_id', function(req, res) {
 });
 
 // add client by id in PARAMS
+/*
 app.post('/api/client/:_id', function(req, res) {
     var client = new Client({ cli_id : req.params._id});
     Client.addClient(client, function (err, client) {
@@ -293,6 +309,7 @@ app.post('/api/client/:_id', function(req, res) {
         }
     });
 });
+*/
 
 
 // staff

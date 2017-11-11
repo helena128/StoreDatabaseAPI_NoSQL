@@ -20,21 +20,6 @@ myApp.controller('StaffController', [ '$scope', '$http', '$location', '$routePar
                     console.log('Error while deleting');
                 })
             };
-            /*
-            $scope.getPeople = function () {
-                $http.get('/api/people').then(function(response){
-                    var data = response.data;
-                    $scope.people = data;
-                    console.log(data);
-                });
-            };
-
-            $scope.addClient = function (id) {
-                $http.post('/api/client/' + id).then(function (response) {
-                    $scope.human = response;
-                    window.location.href="#!client";
-                });
-            };*/
         }
     ]
 );

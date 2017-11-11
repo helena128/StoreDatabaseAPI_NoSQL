@@ -12,7 +12,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
         })
 
         // people pages
-        .when('/people', {
+        /*.when('/people', {
             templateUrl: 'views/people.html',
             controller: 'PeopleController' // the 1st thing we see
         })
@@ -43,7 +43,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
         .when('/people/add', {
             controller: 'PeopleController',
             templateUrl: 'views/add_people.html'
-        })
+        })*/
 
         // store
         .when('/store', {
@@ -64,10 +64,10 @@ myApp.config(['$routeProvider', function($routeProvider) {
         })
 
         // add client
-        .when('/client/add', {
+        /*.when('/client/add', {
             templateUrl: 'views/add_client.html',
             controller: 'ClientController'
-        })
+        })*/
 
         // purchase
         .when('/purchase', {
