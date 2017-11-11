@@ -14,11 +14,11 @@
         </thead>
         <tbody>
         <tr ng-repeat="s in staff">
-            <td>{{s.staff_id.first_name}} {{s.staff_id.last_name}}</td>
-            <td>{{s.staff_id.phone}}</td>
-            <td>{{s.staff_id.email}}</td>
-            <td>{{s.staff_id.passport}}</td>
-            <td>{{s.store_id.store_building}} {{s.store_id.store_street}}, {{s.store_id.store_city}}</td>
+            <td>{{s.first_name}} {{s.last_name}}</td>
+            <td>{{s.phone}}</td>
+            <td>{{s.email}}</td>
+            <td>{{s.passport}}</td>
+            <td>{{s.store_building}} {{s.store_street}}, {{s.store_city}}</td>
             <td align="right">
                 <button class="btn btn-danger" ng-click="removeStaff(s._id)">Remove</button>
             </td>

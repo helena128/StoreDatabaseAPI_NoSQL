@@ -9,25 +9,27 @@
             <th>Sold by</th>
             <th>Client</th>
             <!--th>Date</th-->
+            <th>Product Name</th>
             <th>Price</th>
             <th>Amount</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="p in purchase">
-            <td>{{p.prod_id.product_name}}</td>
-            <td>{{p.staff_id.last_name}}</td>
-            <td>{{p.client_id.last_name}}</td>
+            <td>{{p.product_name}}</td>
+            <td>{{p.staff_first_name}} {{p.staff_last_name}}</td>
+            <td>{{p.client_first_name}} {{p.client_last_name}}</td>
             <!--td>{{p.date_sold}}</td-->
-            <td>{{p.prod_id.product_price}}</td>
+            <td>{{p.product_name}}</td>
+            <td>{{p.product_price}}</td>
             <td>{{p.amount}}</td>
-            <!--td align="right"><a class="btn btn-info" href="#!people/details/{{c.cli_id._id}}">View Details</a>&nbsp;&nbsp;
-                <button class="btn btn-danger" ng-click="removeClient(c._id)">Remove</button>&nbsp;&nbsp;
-                <a class="btn btn-warning" href="#!people/edit/{{c.cli_id._id}}">Edit</a></td-->
+            <td align="right"><!--a class="btn btn-info" href="#!people/details/{{c.cli_id._id}}">View Details</a-->
+                <button class="btn btn-danger" ng-click="removePurchase(p._id)">Remove</button>
+                <!--a class="btn btn-warning" href="#!people/edit/{{c.cli_id._id}}">Edit</a--></td>
         </tr>
-        <!--tr>
-            <td colspan="5" align="right"><a class="btn btn-primary" href="#!client/add">Add Client</a></td>
-        </tr-->
+        <!tr>
+            <td colspan="7" align="right"><a class="btn btn-primary" href="#!purchase/add">Add Purchase</a></td>
+        </tr>
         </tbody>
     </table>
 </div>

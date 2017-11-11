@@ -378,6 +378,19 @@ app.get('/api/purchase', function (req, res) {
     })
 });
 
+// delete purchase
+app.delete('/api/purchase/:_id', function(req, res) {
+    var id = req.params._id;
+    Purchase.removePurchase(id, function(err, purchase) {
+        if (err) {
+            console.error(">> Error deleting purchase" + err);
+            res.status(500).send({ error: 'Deleting purchase failed!' });
+        } else {
+            res.json(purchase);
+        }
+    })
+});
+
 app.listen(3000);
 console.log('Running on port 3000...');
 

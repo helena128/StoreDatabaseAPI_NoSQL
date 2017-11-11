@@ -12,15 +12,16 @@ myApp.controller('PurchaseController', [ '$scope', '$http', '$location', '$route
                 });
             };
 
-            /*$scope.removeClient = function (id) {
-                $http.delete('/api/client/' + id).then(function(response) {
-                    console.log('Client deleted');
-                    window.location.href="#!client";
+            $scope.removePurchase = function (id) {
+                $http.delete('/api/purchase/' + id).then(function(response) {
+                    console.log('Purchase deleted');
+                    window.location.href="#!purchase";
                 }).catch (function (){
                     console.log('Error while deleting');
                 })
             };
 
+            /*
             $scope.getPeople = function () {
                 $http.get('/api/people').then(function(response){
                     var data = response.data;

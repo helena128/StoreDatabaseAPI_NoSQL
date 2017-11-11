@@ -5,6 +5,7 @@ var productSchema = mongoose.Schema({
         product_name: {
             type: String,
             required: [true, 'Product name cannot be null'],
+            unique: [true, 'There cannot be 2 products with the same name'],
             validate: {
                 validator: function (v) {
                     return /^[A-Za-z0-9\- ]+$/.test(v);

@@ -63,15 +63,16 @@ myApp.config(['$routeProvider', function($routeProvider) {
             controller: 'ClientController'
         })
 
-        // add client
-        /*.when('/client/add', {
-            templateUrl: 'views/add_client.html',
-            controller: 'ClientController'
-        })*/
 
         // purchase
         .when('/purchase', {
             templateUrl: 'views/purchase.html',
+            controller: 'PurchaseController'
+        })
+
+        // add purchase
+        .when('/purchase/add', {
+            templateUrl: 'views/add_purchase.html',
             controller: 'PurchaseController'
         })
 
