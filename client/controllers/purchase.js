@@ -21,21 +21,16 @@ myApp.controller('PurchaseController', [ '$scope', '$http', '$location', '$route
                 })
             };
 
-            /*
-            $scope.getPeople = function () {
-                $http.get('/api/people').then(function(response){
-                    var data = response.data;
-                    $scope.people = data;
-                    console.log(data);
+            $scope.addPurchase = function () {
+                $http.post('/api/purchase/', $scope.purchase).then(function (response) {
+                    $scope.purchase = response;
+                    window.location.href="#!purchase";
                 });
             };
 
-            $scope.addClient = function (id) {
-                $http.post('/api/client/' + id).then(function (response) {
-                    $scope.human = response;
-                    window.location.href="#!client";
-                });
-            };*/
+            $scope.deselect = function() {
+                $scope.purchase = "";
+            }
         }
     ]
 );

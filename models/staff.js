@@ -133,3 +133,7 @@ module.exports.removeStaff = function(id, callback){
     var query = {_id: id};
     Staff.remove(query, callback);
 };
+
+module.exports.getStaffByMail = function(mail, callback) {
+    var query = Staff.findOne({'email': mail}).exec(callback);
+};

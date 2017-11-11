@@ -12,15 +12,6 @@ myApp.controller('StoreController', [ '$scope', '$http', '$location', '$routePar
             });
         };
 
-        /*
-        $scope.getHuman = function (id) {
-            $http.get('/api/people/:id').then(function(response){
-                var data = response.data;
-                $scope.human = data;
-                console.log(data);
-            });
-        };*/
-
         $scope.removeStore = function (id) {
             $http.delete('/api/store/' + id).then(function(response) {
                 //refresh();

@@ -11,14 +11,12 @@ myApp.controller('PeopleController', [ '$scope', '$http', '$location', '$routePa
             });
         };
 
-        $scope.getHuman = function (/*id*/) {
-            //console.log(">> People id" + id);
+        $scope.getHuman = function() {
             var id = $routeParams.id;
             $http.get('/api/people/' + id).then(function(response){
                 var data = response.data;
                 $scope.human = data;
                 console.log(data);
-                //window.location.href = ("#!people/details/" + id);
             });
         };
 
@@ -37,7 +35,6 @@ myApp.controller('PeopleController', [ '$scope', '$http', '$location', '$routePa
 
         $scope.removePeople = function (id) {
             $http.delete('/api/people/' + id).then(function(response) {
-                //refresh();
                 console.log('Book deleted');
                 window.location.href="#!people";
             }).catch (function (){
@@ -47,7 +44,6 @@ myApp.controller('PeopleController', [ '$scope', '$http', '$location', '$routePa
 
         $scope.addPeople = function () {
             $http.post('/api/people', $scope.human).then(function(response) {
-                //refresh();
                 console.log('People posted');
                 window.location.href="#!people";
             }).catch (function (){

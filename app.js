@@ -351,19 +351,49 @@ app.delete('/api/staff/:_id', function(req, res) {
     })
 });
 
+app.get('/api/staff/mail/:mail', function (req, res) {
+    var mail = req.params.mail;
+    Staff.getStaffByMail(mail, function(err, people){
+        if (err) {
+            console.error(">> Error finding people");
+            res.status(500).send({ error: 'Listing people failed!' });
+        } else {
+            res.json(people);
+        }
+    })
+});
+
+
 
 // purchase
 // add purchase
+// TODO: check not only staff's email BUT name + client name and email + product
 app.post('/api/purchase', function(req, res) {
     var purchase = req.body;
-    Purchase.addPurchase(purchase, function(err, purchase) {
+
+    // check that the staff exists by their email
+    Staff.getStaffByMail(purchase.staff_email, function (err, staff) {
         if (err) {
-            console.error(">> Error creating purchase" + err);
-            res.status(500).send({ error: 'Creating purchase failed!' });
+            console.error(">> Error finding staff");
+            res.status(500).send({ error: ' failed!' });
         } else {
-            res.json(purchase);
+            //res.json(staff);
+            console.log(">> Staff found");
+
+            // check that we found our staff member
+            if (!isEmptyObject(staff)){
+
+                Purchase.addPurchase(purchase, function (err, purchase) {
+                    if (err) {
+                        console.error(">> Error creating purchase" + err);
+                        res.status(500).send({error: 'Creating purchase failed!'});
+                    } else {
+                        res.json(purchase);
+                    }
+                });
+            }
         }
-    })
+    });
 });
 
 // get purchase
@@ -390,6 +420,17 @@ app.delete('/api/purchase/:_id', function(req, res) {
         }
     })
 });
+
+
+// detect if our json value is null
+function isEmptyObject(obj) {
+    for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+            return false;
+        }
+    }
+    return true;
+}
 
 app.listen(3000);
 console.log('Running on port 3000...');

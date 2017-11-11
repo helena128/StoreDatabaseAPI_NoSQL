@@ -7,11 +7,10 @@ myApp.config(['$routeProvider', function($routeProvider) {
         })
 
         .when ('/home', {
-            //controller: 'PeopleController',
             templateUrl: 'views/home.html'
         })
 
-        // people pages
+        // people pages - not used in the current version
         /*.when('/people', {
             templateUrl: 'views/people.html',
             controller: 'PeopleController' // the 1st thing we see
@@ -85,7 +84,5 @@ myApp.config(['$routeProvider', function($routeProvider) {
         .otherwise({
             redirectTo: '/home'
         });
-
-    // store staff client purchase product
 
 }]);
