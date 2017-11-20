@@ -79,7 +79,6 @@ module.exports.updateStore = function(id, store, options, callback){
         store_city: store.store_city,
         store_zipcode: store.store_zipcode
     };
-    /*console.log(update.store_zipcode + " >" + update.store_city + "< >" + update.store_building + "<  >" +
-        update.store_street); */
+
     Store.findOneAndUpdate(query, update, options, callback);
 };

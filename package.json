@@ -12,7 +12,9 @@
     "express": "~4.15.5",
     "jade": "~1.11.0",
     "mongoose": "*",
+    "mongoose-redis": "^1.0.8",
     "morgan": "~1.9.0",
+    "redis": "^2.8.0",
     "serve-favicon": "~2.4.5"
   }
 }
