@@ -46,7 +46,7 @@ app.get('/api/store', function(req, res) {
             console.error(">> Error finding stores");
             res.status(500).send({ error: 'Listing stores failed!' });
         }
-        res.json(people);
+        else res.json(people);
     })
 });
 
@@ -69,11 +69,14 @@ app.get('/api/store/:_id', function (req, res) {
                     console.error(">> Error finding stores");
                     res.status(500).send({error: 'Listing stores failed!'});
                 } else { // add to cache
-                    console.log('>> Found in DB');
+                    if (isEmptyObject(store)) console.log('>> Not in DB');
+                    else console.log('>> Found in DB');
                     //client.setex(id, CACHE_INTERVAL, JSON.stringify(store));
                     if (!isEmptyObject(store)) {
                         cacheOp.setCache(client, store, CACHE_INTERVAL);
                         res.json(store);
+                    } else {
+                        res.status(200).send({message: 'Not found'});
                     }
                 }
             });
@@ -107,7 +110,7 @@ app.post('/api/store', function (req, res) {
             console.error(">> Error posting stores", err);
             res.status(500).send({ error: 'Posting stores failed!' });
         } else {
-            console.log(">> Store is set to cache: ", JSON.parse(store1));
+            console.log(">> Store is set to cache: ", store1.toString());
             //client.setex(store1._id, CACHE_INTERVAL, JSON.stringify(store1)); // save the new store to cache
             cacheOp.setCache(client, store1, CACHE_INTERVAL);
             res.json(store1);
@@ -127,7 +130,7 @@ app.delete('/api/store/:_id', function(req, res) {
         } else {
             // delete cache
             cacheOp.deleteCache(client, id);
-            res.json(store);
+            res.status(200).send({message: 'store deleted from cache and db'});
         }
     })
 });
