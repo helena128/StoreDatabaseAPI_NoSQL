@@ -28,8 +28,9 @@ Purchase = require('./models/purchase');
 
 
 // routing
-const PurchaseController = require('./modules/purchaseController');
-const StaffController = require('./modules/staffController');
+const PurchaseController = require('./modules/controllers/purchaseController');
+const StaffController = require('./modules/controllers/staffController');
+const ClientController = require('./modules/controllers/clientController');
 
 // operations
 var cacheOp = require('./modules/cacheOperations');
@@ -241,29 +242,12 @@ app.post('/api/client', function (req, res) {
 
 
 app.get('/api/client', function (req, res) {
-    console.log(">> Sending products...");
-    Client.getClients(function(err, client){
-        if (err) {
-            console.error(">> Error finding products");
-            res.status(500).send({ error: 'Listing products failed!' });
-        } else {
-            //console.log(product.product_name + " " + product.product_price);
-            res.json(client);
-        }
-    })
+    ClientController.getClients(req, res);
 });
 
 // remove clients
 app.delete('/api/client/:_id', function(req, res) {
-    var id = req.params._id;
-    Client.removeClient(id, function(err, client) {
-        if (err) {
-            console.error(">> Error deleting client" + err);
-            res.status(500).send({ error: 'Deleting client failed!' });
-        } else {
-            res.json(client);
-        }
-    })
+    ClientController.removeClient(req, res);
 });
 
 // staff
