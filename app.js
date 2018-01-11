@@ -253,21 +253,7 @@ app.get('/api/client', function (req, res) {
     })
 });
 
-// getting all clients
-// complains about deprecated mpromise library
-/*
-app.get('/api/client', function (req, res) {
-    Client.getClients(function(err, client) {
-        if (err) {
-            console.error(">> Error getting clients " + err);
-            res.status(500).send({ error: 'Getting clients failed!' });
-        } else {
-            res.json(client);
-        }
-    })
-});
-*/
-
+// remove clients
 app.delete('/api/client/:_id', function(req, res) {
     var id = req.params._id;
     Client.removeClient(id, function(err, client) {
@@ -280,59 +266,20 @@ app.delete('/api/client/:_id', function(req, res) {
     })
 });
 
-// add client by id in PARAMS
-/*
-app.post('/api/client/:_id', function(req, res) {
-    var client = new Client({ cli_id : req.params._id});
-    Client.addClient(client, function (err, client) {
-        if (err) {
-            console.error(">> Error creating client by Id" + err);
-            res.status(500).send({ error: 'Creating client by id failed!' });
-        } else {
-            res.json(client);
-        }
-    });
-});
-*/
-
-
 // staff
 // add staff
 app.post('/api/staff', function(req, res) {
-    var staff = req.body;
-    Staff.addStaff(staff, function(err, staff) {
-        if (err) {
-            console.error(">> Error creating staff" + err);
-            res.status(500).send({ error: 'Creating staff failed!' });
-        } else {
-            res.json(staff);
-        }
-    })
+    StaffController.addStaff(req, res);
 });
 
 // get staff
 app.get('/api/staff', function (req, res) {
-    Staff.getStaff(function(err, staff) {
-        if (err) {
-            console.error(">> Error getting clients " + err);
-            res.status(500).send({ error: 'Getting clients failed!' });
-        } else {
-            res.json(staff);
-        }
-    })
+    StaffController.getStaff(req, res);
 });
 
 // delete staff
 app.delete('/api/staff/:_id', function(req, res) {
-    var id = req.params._id;
-    Staff.removeStaff(id, function(err, staff) {
-        if (err) {
-            console.error(">> Error deleting staff" + err);
-            res.status(500).send({ error: 'Deleting staff failed!' });
-        } else {
-            res.json(staff);
-        }
-    })
+    StaffController.deleteStaff(req, res);
 });
 
 // get staff by mail
