@@ -11,3 +11,14 @@ exports.getPurchases = function (req, res) {
     })
 };
 
+exports.removePurchase = function(req, res) {
+    var id = req.params._id;
+    Purchase.removePurchase(id, function(err, purchase) {
+        if (err) {
+            console.error(">> Error deleting purchase" + err);
+            res.status(500).send({ error: 'Deleting purchase failed!' });
+        } else {
+            res.json(purchase);
+        }
+    })
+};

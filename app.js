@@ -33,6 +33,9 @@ const PurchaseController = require('./modules/purchaseController');
 // operations
 var cacheOp = require('./modules/cacheOperations');
 
+// util
+var Util = require('./modules/util');
+
 // Connect to mongoose
 mongoose.connect('mongodb://localhost:27017/storedb');
 
@@ -65,7 +68,7 @@ app.get('/api/store/:_id', function (req, res) {
 
     client.get(id, function(err, result) {
         if (err) console.log('Error searching cache');
-        if (!isEmptyObject(result)) { // search in cache
+        if (!Util.isEmptyObject(result)) { // search in cache
             console.log('>> Found in cache');
             res.json(JSON.parse(result));
         } else { // if not in cache
@@ -77,7 +80,7 @@ app.get('/api/store/:_id', function (req, res) {
                 } else { // add to cache
                     console.log('>> Found in DB');
                     //client.setex(id, CACHE_INTERVAL, JSON.stringify(store));
-                    if (!isEmptyObject(store)) {
+                    if (!Util.isEmptyObject(store)) {
                         cacheOp.setCache(client, store, CACHE_INTERVAL);
                         res.json(store);
                     }
@@ -361,7 +364,7 @@ app.post('/api/purchase', function(req, res) {
             console.log(">> Staff found");
 
             // check that we found our staff member
-            if (!isEmptyObject(staff)){
+            if (!Util.isEmptyObject(staff)){
 
                 Purchase.addPurchase(purchase, function (err, purchase) {
                     if (err) {
@@ -382,30 +385,12 @@ app.get('/api/purchase', function (req, res) {
     PurchaseController.getPurchases(req,res);
 });
 
-/*
+
 // delete purchase
 app.delete('/api/purchase/:_id', function(req, res) {
-    var id = req.params._id;
-    Purchase.removePurchase(id, function(err, purchase) {
-        if (err) {
-            console.error(">> Error deleting purchase" + err);
-            res.status(500).send({ error: 'Deleting purchase failed!' });
-        } else {
-            res.json(purchase);
-        }
-    })
-});*/
+    PurchaseController.removePurchase(req,res);
+});
 
-
-// detect if our json value is null
-function isEmptyObject(obj) {
-    for (var key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
-            return false;
-        }
-    }
-    return true;
-}
 
 app.listen(3000);
 console.log('Running on port 3000...');
