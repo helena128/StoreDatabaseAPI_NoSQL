@@ -29,6 +29,7 @@ Purchase = require('./models/purchase');
 
 // routing
 const PurchaseController = require('./modules/purchaseController');
+const StaffController = require('./modules/staffController');
 
 // operations
 var cacheOp = require('./modules/cacheOperations');
@@ -334,49 +335,17 @@ app.delete('/api/staff/:_id', function(req, res) {
     })
 });
 
+// get staff by mail
 app.get('/api/staff/mail/:mail', function (req, res) {
-    var mail = req.params.mail;
-    Staff.getStaffByMail(mail, function(err, people){
-        if (err) {
-            console.error(">> Error finding people");
-            res.status(500).send({ error: 'Listing people failed!' });
-        } else {
-            res.json(people);
-        }
-    })
+    StaffController.getStaffByMail(req, res);
 });
 
 
 
 // purchase
-// add purchase
-// TODO: check not only staff's email BUT name + client name and email + product
+// add purchase TODO: fix
 app.post('/api/purchase', function(req, res) {
-    var purchase = req.body;
-
-    // check that the staff exists by their email
-    Staff.getStaffByMail(purchase.staff_email, function (err, staff) {
-        if (err) {
-            console.error(">> Error finding staff");
-            res.status(500).send({ error: ' failed!' });
-        } else {
-            //res.json(staff);
-            console.log(">> Staff found");
-
-            // check that we found our staff member
-            if (!Util.isEmptyObject(staff)){
-
-                Purchase.addPurchase(purchase, function (err, purchase) {
-                    if (err) {
-                        console.error(">> Error creating purchase" + err);
-                        res.status(500).send({error: 'Creating purchase failed!'});
-                    } else {
-                        res.json(purchase);
-                    }
-                });
-            }
-        }
-    });
+    PurchaseController.addPurchase(req, res);
 });
 
 
