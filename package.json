@@ -9,7 +9,7 @@
     "body-parser": "^1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
-    "express": "~4.15.5",
+    "express": "~4.13.4",
     "jade": "~1.11.0",
     "mongoose": "*",
     "mongoose-redis": "^1.0.8",

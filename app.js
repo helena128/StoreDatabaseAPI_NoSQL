@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var router = express.Router();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
@@ -17,12 +18,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //app.use(bodyParser.json({type: 'application/json'}));
 
+
 // models
 Store = require('./models/store');
 Client = require('./models/clients');
 Product = require('./models/product');
 Staff = require('./models/staff');
 Purchase = require('./models/purchase');
+
+
+// routing
+const PurchaseController = require('./modules/purchaseController');
 
 // operations
 var cacheOp = require('./modules/cacheOperations');
@@ -46,7 +52,7 @@ app.get('/api/store', function(req, res) {
             console.error(">> Error finding stores");
             res.status(500).send({ error: 'Listing stores failed!' });
         }
-        else res.json(people);
+        res.json(people);
     })
 });
 
@@ -69,14 +75,11 @@ app.get('/api/store/:_id', function (req, res) {
                     console.error(">> Error finding stores");
                     res.status(500).send({error: 'Listing stores failed!'});
                 } else { // add to cache
-                    if (isEmptyObject(store)) console.log('>> Not in DB');
-                    else console.log('>> Found in DB');
+                    console.log('>> Found in DB');
                     //client.setex(id, CACHE_INTERVAL, JSON.stringify(store));
                     if (!isEmptyObject(store)) {
                         cacheOp.setCache(client, store, CACHE_INTERVAL);
                         res.json(store);
-                    } else {
-                        res.status(200).send({message: 'Not found'});
                     }
                 }
             });
@@ -110,7 +113,7 @@ app.post('/api/store', function (req, res) {
             console.error(">> Error posting stores", err);
             res.status(500).send({ error: 'Posting stores failed!' });
         } else {
-            console.log(">> Store is set to cache: ", store1.toString());
+            console.log(">> Store is set to cache: ", JSON.parse(store1));
             //client.setex(store1._id, CACHE_INTERVAL, JSON.stringify(store1)); // save the new store to cache
             cacheOp.setCache(client, store1, CACHE_INTERVAL);
             res.json(store1);
@@ -130,7 +133,7 @@ app.delete('/api/store/:_id', function(req, res) {
         } else {
             // delete cache
             cacheOp.deleteCache(client, id);
-            res.status(200).send({message: 'store deleted from cache and db'});
+            res.json(store);
         }
     })
 });
@@ -373,18 +376,13 @@ app.post('/api/purchase', function(req, res) {
     });
 });
 
+
 // get purchase
 app.get('/api/purchase', function (req, res) {
-    Purchase.getPurchase(function(err, purchase) {
-        if (err) {
-            console.error(">> Error getting purchase " + err);
-            res.status(500).send({ error: 'Getting purchase failed!' });
-        } else {
-            res.json(purchase);
-        }
-    })
+    PurchaseController.getPurchases(req,res);
 });
 
+/*
 // delete purchase
 app.delete('/api/purchase/:_id', function(req, res) {
     var id = req.params._id;
@@ -396,7 +394,7 @@ app.delete('/api/purchase/:_id', function(req, res) {
             res.json(purchase);
         }
     })
-});
+});*/
 
 
 // detect if our json value is null
