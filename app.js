@@ -16,7 +16,6 @@ app.use(express.static(__dirname + '/client'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-//app.use(bodyParser.json({type: 'application/json'}));
 
 
 // models
@@ -32,12 +31,13 @@ const PurchaseController = require('./modules/controllers/purchaseController');
 const StaffController = require('./modules/controllers/staffController');
 const ClientController = require('./modules/controllers/clientController');
 const ProductController = require('./modules/controllers/productController');
+const StoreController = require('./modules/controllers/storeController');
 
 // operations
-var cacheOp = require('./modules/cacheOperations');
+var cacheOp = require('./modules/cacheUtil');
 
 // util
-var Util = require('./modules/util');
+var Util = require('./modules/objectUtil');
 
 // Connect to mongoose
 mongoose.connect('mongodb://localhost:27017/storedb');
@@ -52,14 +52,7 @@ db.once('open', function() {
 // store
 // get all stores
 app.get('/api/store', function(req, res) {
-    console.log(">> Sending stores...");
-    Store.getStore(function(err, people){
-        if (err) {
-            console.error(">> Error finding stores");
-            res.status(500).send({ error: 'Listing stores failed!' });
-        }
-        res.json(people);
-    })
+    StoreController.getStores(req, res);
 });
 
 
