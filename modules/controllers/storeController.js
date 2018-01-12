@@ -73,7 +73,7 @@ exports.updateStore = function (req, res) {
             res.status(500).send({ error: 'Updating store failed!' });
         } else {
             console.log(">> Store is updated in cache", store);
-            cacheOp.deleteCache(client, id); // delete updated from cache
+            CacheUtil.deleteCache(client, id); // delete updated from cache
             res.json(store);
         }
     })
@@ -87,7 +87,7 @@ exports.removeStore = function (req, res) {
             res.status(500).send({ error: 'Deleting store failed!' });
         } else {
             // delete cache
-            cacheOp.deleteCache(client, id);
+            CacheUtil.deleteCache(client, id);
             res.json(store);
         }
     })

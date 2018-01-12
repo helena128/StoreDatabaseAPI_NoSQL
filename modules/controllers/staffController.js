@@ -4,7 +4,7 @@ exports.getStaffByMail = function(req, res) {
     var mail = req.params.mail;
     Staff.getStaffByMail(mail, function(err, people){
         if (err) {
-            res.status(500).send({ error: 'Listing staff failed!' });
+            res.status(500).send({ error: 'Getting staff by mail failed!' });
         } else {
             res.json(people);
         }

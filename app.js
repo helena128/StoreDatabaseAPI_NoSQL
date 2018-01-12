@@ -17,8 +17,7 @@ Product = require('./models/product');
 Staff = require('./models/staff');
 Purchase = require('./models/purchase');
 
-
-// routing
+// controllers
 const PurchaseController = require('./modules/controllers/purchaseController');
 const StaffController = require('./modules/controllers/staffController');
 const ClientController = require('./modules/controllers/clientController');
@@ -30,10 +29,6 @@ mongoose.connect('mongodb://localhost:27017/storedb');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    console.log("Connected");
-});
-
 
 // store
 // get all stores
@@ -126,7 +121,7 @@ app.get('/api/staff/mail/:mail', function (req, res) {
 
 
 // purchase
-// add purchase TODO: fix
+// add purchase
 app.post('/api/purchase', function(req, res) {
     PurchaseController.addPurchase(req, res);
 });

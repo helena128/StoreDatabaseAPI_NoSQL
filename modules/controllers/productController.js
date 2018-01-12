@@ -44,3 +44,14 @@ exports.updateProduct = function (req, res) {
         }
     })
 };
+
+exports.getProductByName = function(req, res) {
+    var name = req.params.product_name;
+    Product.getProductByName(name, function(err, product){
+        if (err) {
+            res.status(500).send({ error: 'Finding product by name failed!' });
+        } else {
+            res.json(product);
+        }
+    })
+};

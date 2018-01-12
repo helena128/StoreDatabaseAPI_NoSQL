@@ -1,5 +1,10 @@
 var Purchase = require('../../models/purchase');
+
+// import to check for current being in DB
 var Staff = require('../../models/staff');
+
+// check for null
+var ObjectUtil = require('../objectUtil');
 
 exports.getPurchases = function (req, res) {
     Purchase.getPurchase(function (err, purchase) {
@@ -22,7 +27,6 @@ exports.removePurchase = function(req, res) {
     })
 };
 
-// TODO: fix
 exports.addPurchase = function(req, res) {
     var purchase = req.body;
 
@@ -35,7 +39,7 @@ exports.addPurchase = function(req, res) {
             console.log(">> Finding staff");
 
             // check that we found our staff member
-            if (!Util.isEmptyObject(staff)){
+            if (!ObjectUtil.isEmptyObject(staff)){
                 console.log("Staff found");
                 Purchase.addPurchase(purchase, function (err, purchase) {
                     if (err) {
