@@ -54,12 +54,9 @@ module.exports.removeProduct = function(id, callback){
 module.exports.updateProduct = function(id, product, options, callback){
     var query = {_id: id};
     var update = {
-        //first_name: options.first_name
         product_name: product.product_name,
         product_price: product.product_price,
         product_pic: product.product_pic
     };
-    /*console.log(update.store_zipcode + " >" + update.store_city + "< >" + update.store_building + "<  >" +
-        update.store_street); */
     Product.findOneAndUpdate(query, update, options, callback);
 };

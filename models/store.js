@@ -48,7 +48,7 @@ var storeSchema = mongoose.Schema({
 
 var Store = module.exports = mongoose.model('Store', storeSchema, 'store');
 
-// get people
+// get store
 module.exports.getStore= function(callback, limit) {
     Store.find(callback).limit(limit);
 };
@@ -59,8 +59,8 @@ module.exports.getStoreById = function(id, callback) {
 };
 
 // add store
-module.exports.addStore = function(people, callback) {
-    Store.create(people, callback);
+module.exports.addStore = function(store, callback) {
+    Store.create(store, callback);
 };
 
 // delete store
@@ -73,7 +73,6 @@ module.exports.removeStore = function(id, callback){
 module.exports.updateStore = function(id, store, options, callback){
     var query = {_id: id};
     var update = {
-        //first_name: options.first_name
         store_street: store.store_street,
         store_building: store.store_building,
         store_city: store.store_city,

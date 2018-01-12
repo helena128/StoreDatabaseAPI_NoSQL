@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 
 // Client schema
-// People schema
 var clientSchema = mongoose.Schema({
         first_name: {
             type: String,
