@@ -51,3 +51,16 @@ exports.getStoreById = function (req, res) {
     });
 };
 
+exports.addStore = function (req, res) {
+    var store1 = req.body;
+
+    Store.addStore(store1, function(err, store1){
+        if (err) {
+            res.status(500).send({ error: 'Posting stores failed!' });
+        } else {
+            CacheUtil.setCache(client, store1, CACHE_INTERVAL); // caching new store
+            res.json(store1);
+        }
+    });
+};
+

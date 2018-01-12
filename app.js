@@ -74,19 +74,7 @@ app.put('/api/store/:_id', function(req, res) {
 
 // creating store
 app.post('/api/store', function (req, res) {
-    var store1 = req.body;
-    console.log('> Creating store');
-    Store.addStore(store1, function(err, store1){
-        if (err) {
-            console.error(">> Error posting stores", err);
-            res.status(500).send({ error: 'Posting stores failed!' });
-        } else {
-            console.log(">> Store is set to cache: ", JSON.parse(store1));
-            //client.setex(store1._id, CACHE_INTERVAL, JSON.stringify(store1)); // save the new store to cache
-            cacheOp.setCache(client, store1, CACHE_INTERVAL);
-            res.json(store1);
-        }
-    });
+    StoreController.addStore(req, res);
 });
 
 
