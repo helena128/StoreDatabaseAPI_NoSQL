@@ -31,3 +31,16 @@ exports.removeProduct = function (req, res) {
         }
     })
 };
+
+exports.updateProduct = function (req, res) {
+    var id = req.params._id;
+    var product = req.body;
+
+    Product.updateProduct(id, product, {}, function(err, product){
+        if (err) {
+            res.status(500).send({ error: 'Updating store failed!' });
+        } else {
+            res.json(product);
+        }
+    })
+};
