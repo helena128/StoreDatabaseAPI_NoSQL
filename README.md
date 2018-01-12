@@ -1,6 +1,6 @@
 # StoreDatabaseAPI_NoSQL
 ## Setup
-Used:
+Used components:
 - MongoDB 3.2.17
 - Angular v1.6.6
 - All other things used in this project are stated in package.json file, so be sure you have npm installed

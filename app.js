@@ -31,6 +31,7 @@ Purchase = require('./models/purchase');
 const PurchaseController = require('./modules/controllers/purchaseController');
 const StaffController = require('./modules/controllers/staffController');
 const ClientController = require('./modules/controllers/clientController');
+const ProductController = require('./modules/controllers/productController');
 
 // operations
 var cacheOp = require('./modules/cacheOperations');
@@ -166,44 +167,16 @@ app.put('/api/store/:_id', function(req, res) {
 // products
 // add product
 app.post('/api/product', function (req, res) {
-    console.log(">> Posting product..." + req.body.product_name); // debugging
-    var product1 = req.body;
-    console.log('>> Product' + product1.product_name +' ' + product1.product_price + ' ' + product1.product_price);
-    Product.addProduct(product1, function(err, product1){
-        if (err) {
-            console.error(">> Error posting products");
-            res.status(500).send({ error: 'Posting products failed!' });
-        } else {
-            res.json(product1);
-        }
-    });
+    ProductController.addProduct(req, res);
 });
 
 // get products
 app.get('/api/product', function (req, res) {
-    console.log(">> Sending products...");
-    Product.getProducts(function(err, product){
-        if (err) {
-            console.error(">> Error finding products");
-            res.status(500).send({ error: 'Listing products failed!' });
-        } else {
-            //console.log(product.product_name + " " + product.product_price);
-            res.json(product);
-        }
-    })
+    ProductController.getProducts(req, res);
 });
 
 app.delete('/api/product/:_id', function(req, res) {
-    var id = req.params._id;
-    // console.log('Trying to delete: ' + id);
-    Product.removeProduct(id, function(err, product) {
-        if (err) {
-            console.error(">> Error updating store" + err);
-            res.status(500).send({ error: 'Delete store failed!' });
-        } else {
-            res.json(product);
-        }
-    })
+    ProductController.removeProduct(req, res);
 });
 
 app.put('/api/product/:_id', function(req, res) {
