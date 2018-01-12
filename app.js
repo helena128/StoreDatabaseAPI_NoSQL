@@ -57,19 +57,7 @@ app.get('/api/store/:_id', function (req, res) {
 
 // updating store
 app.put('/api/store/:_id', function(req, res) {
-    var id = req.params._id;
-    var store = req.body;
-    Store.updateStore(id, store, {}, function(err, store){
-        if (err) {
-            console.error(">> Error updating people" + err);
-            res.status(500).send({ error: 'Updating people failed!' });
-        } else {
-            console.log(">> Store is updated in cache", store);
-            //client.setex(store._id, CACHE_INTERVAL, JSON.stringify(store)); // save the new store to cache
-            cacheOp.deleteCache(client, id);
-            res.json(store);
-        }
-    })
+    StoreController.updateStore(req, res);
 });
 
 // creating store
@@ -80,38 +68,8 @@ app.post('/api/store', function (req, res) {
 
 // Delete store
 app.delete('/api/store/:_id', function(req, res) {
-    var id = req.params._id;
-    console.log('> Trying to delete store: ', id);
-    Store.removeStore(id, function(err, store) {
-        if (err) {
-            console.error(">> Error deleting store", err);
-            res.status(500).send({ error: 'Deleting store failed!' });
-        } else {
-            // delete cache
-            cacheOp.deleteCache(client, id);
-            res.json(store);
-        }
-    })
+    StoreController.removeStore(req, res);
 });
-
-/*
-app.put('/api/store/:_id', function(req, res) {
-    //var id = req.param('_id');
-    var id = req.params._id;
-    var store = req.body;
-
-    //console.log(">> id" + id + " " + store.store_zipcode);
-
-    Store.updateStore(id, store, {}, function(err, store){
-        if (err) {
-            console.error(">> Error updating store" + err);
-            res.status(500).send({ error: 'Updating store failed!' });
-        } else {
-            res.json(store);
-        }
-    })
-});
-*/
 
 
 // products

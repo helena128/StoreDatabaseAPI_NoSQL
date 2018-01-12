@@ -64,3 +64,31 @@ exports.addStore = function (req, res) {
     });
 };
 
+
+exports.updateStore = function (req, res) {
+    var id = req.params._id;
+    var store = req.body;
+    Store.updateStore(id, store, {}, function(err, store){
+        if (err) {
+            res.status(500).send({ error: 'Updating store failed!' });
+        } else {
+            console.log(">> Store is updated in cache", store);
+            cacheOp.deleteCache(client, id); // delete updated from cache
+            res.json(store);
+        }
+    })
+};
+
+exports.removeStore = function (req, res) {
+    var id = req.params._id;
+
+    Store.removeStore(id, function(err, store) {
+        if (err) {
+            res.status(500).send({ error: 'Deleting store failed!' });
+        } else {
+            // delete cache
+            cacheOp.deleteCache(client, id);
+            res.json(store);
+        }
+    })
+};
