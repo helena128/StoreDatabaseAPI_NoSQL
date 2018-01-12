@@ -4,13 +4,6 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-// setting up redis
-var redis = require('redis');
-var client = redis.createClient();
-
-// set cache interval
-const CACHE_INTERVAL = 10000;
-
 // setting directory for front
 app.use(express.static(__dirname + '/client'));
 
@@ -59,31 +52,7 @@ app.get('/api/store', function(req, res) {
 // here we use functions with cache
 // get store by its id
 app.get('/api/store/:_id', function (req, res) {
-    console.log("> Sending store...");
-    var id = req.params._id;
-
-    client.get(id, function(err, result) {
-        if (err) console.log('Error searching cache');
-        if (!Util.isEmptyObject(result)) { // search in cache
-            console.log('>> Found in cache');
-            res.json(JSON.parse(result));
-        } else { // if not in cache
-            console.log('>> Empty in cache. Finding in DB...');
-            Store.getStoreById(id, function (err, store) {
-                if (err) {
-                    console.error(">> Error finding stores");
-                    res.status(500).send({error: 'Listing stores failed!'});
-                } else { // add to cache
-                    console.log('>> Found in DB');
-                    //client.setex(id, CACHE_INTERVAL, JSON.stringify(store));
-                    if (!Util.isEmptyObject(store)) {
-                        cacheOp.setCache(client, store, CACHE_INTERVAL);
-                        res.json(store);
-                    }
-                }
-            });
-        }
-    });
+    StoreController.getStoreById(req, res);
 });
 
 // updating store
