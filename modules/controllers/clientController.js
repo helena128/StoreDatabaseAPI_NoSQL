@@ -20,3 +20,15 @@ exports.getClients = function (req, res) {
         }
     })
 };
+
+exports.addClient = function (req, res) {
+    var client1 = req.body;
+    Client.addClient(client1, function(err, client1){
+        if (err) {
+            console.error(">> Error posting people" + err);
+            res.status(500).send({ error: 'Sending people failed!' });
+        } else {
+            res.json(client1);
+        }
+    });
+};

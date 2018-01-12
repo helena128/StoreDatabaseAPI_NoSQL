@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-var router = express.Router();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
@@ -25,12 +24,6 @@ const StaffController = require('./modules/controllers/staffController');
 const ClientController = require('./modules/controllers/clientController');
 const ProductController = require('./modules/controllers/productController');
 const StoreController = require('./modules/controllers/storeController');
-
-// operations
-var cacheOp = require('./modules/cacheUtil');
-
-// util
-var Util = require('./modules/objectUtil');
 
 // Connect to mongoose
 mongoose.connect('mongodb://localhost:27017/storedb');
@@ -92,20 +85,10 @@ app.put('/api/product/:_id', function(req, res) {
 });
 
 
-
 // client
-// add client by people's id
+// add client
 app.post('/api/client', function (req, res) {
-    console.log(">> Posting client..." + req.body.passport); // debugging
-    var client1 = req.body;
-    Client.addClient(client1, function(err, client1){
-        if (err) {
-            console.error(">> Error posting people" + err);
-            res.status(500).send({ error: 'Sending people failed!' });
-        } else {
-            res.json(client1);
-        }
-    });
+    ClientController.addClient(req, res);
 });
 
 
@@ -117,6 +100,7 @@ app.get('/api/client', function (req, res) {
 app.delete('/api/client/:_id', function(req, res) {
     ClientController.removeClient(req, res);
 });
+
 
 // staff
 // add staff
